@@ -9,8 +9,7 @@ class AppTheme {
   static ThemeData get light {
     final base = ThemeData.light();
     return base.copyWith(
-      // Keep density and app bar sizing consistent between themes to avoid
-      // unexpected layout differences when switching modes.
+
       visualDensity: VisualDensity.standard,
       colorScheme: base.colorScheme.copyWith(
         primary: _primary,
