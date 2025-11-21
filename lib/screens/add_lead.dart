@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:internship_project/models/leaders.dart';
 import 'package:internship_project/provider/add_leaders.dart';
 
-//using the provider to add leaders
 
 class AddLeadScreen extends ConsumerStatefulWidget {
   const AddLeadScreen({super.key});
@@ -21,7 +20,6 @@ class _AddLeadScreenState extends ConsumerState<AddLeadScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // NOTE: We'll create the Leaders instance after the form is saved.
 
     void saveForm() {
       final isValid = formkey.currentState?.validate() ?? false;
@@ -41,7 +39,6 @@ class _AddLeadScreenState extends ConsumerState<AddLeadScreen> {
         return;
       }
 
-      // Create leader and assign contact based on preferred method
       final newLead = Leaders(
         name: newLeadName,
         phone: isChosen == 'phone' ? newLeadContact : null,
@@ -49,7 +46,6 @@ class _AddLeadScreenState extends ConsumerState<AddLeadScreen> {
         notes: notes,
       );
 
-      // debug prints
       // ignore: avoid_print
       print('Lead Name: $newLeadName');
       // ignore: avoid_print
@@ -61,7 +57,6 @@ class _AddLeadScreenState extends ConsumerState<AddLeadScreen> {
         context,
       ).showSnackBar(const SnackBar(content: Text('Lead saved successfully.')));
 
-      // add to provider then pop
       ref.read(leadersChangeNotifierProvider).addLeader(newLead);
       Navigator.of(context).pop();
     }
@@ -133,7 +128,6 @@ class _AddLeadScreenState extends ConsumerState<AddLeadScreen> {
                       return 'Please enter a valid email address';
                     }
 
-                    // Check duplicates in provider
                     final existing = ref
                         .read(leadersChangeNotifierProvider)
                         .leaders;
@@ -167,7 +161,6 @@ class _AddLeadScreenState extends ConsumerState<AddLeadScreen> {
                       return 'Please enter a phone number';
                     }
 
-                    // normalize to digits only for comparison
                     String digits(String s) => s.replaceAll(RegExp(r'\D'), '');
                     final inputDigits = digits(v);
 
